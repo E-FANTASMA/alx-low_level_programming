@@ -5,9 +5,9 @@
  * print_buffer - print a  buffer
  *
  * @b: the  buffer to be printed
- * 
+ *
  * @size: the size of the buffer to be printed
- * 
+ *
  * Return: success
  */
 
