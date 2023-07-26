@@ -8,7 +8,11 @@
  */
 int main(void)
 {
-	char str[] = "Expect the best. Prepare for the worst. Capitalize on what comes.\nhello world! hello-world 0123456hello world\thello world.hello world\n";
+	char str1[] = "Expect the best. Prepare for the worst.";
+	char str2[] =	"Capitalize on what comes.";
+	char str3[] = "\nhello world! hello-world 0123456hello world";
+	char str4[] = "\thello world.hello world\n";
+	char str[] = str1 + str2 + str3 + str4;
 	char *ptr;
 
 	ptr = cap_string(str);
