@@ -2,7 +2,7 @@
 
 
 /**
- * wildcmp - compares two strings 
+ * wildcmp - compares two strings
  *
  * @s1: string to compare to
  *
