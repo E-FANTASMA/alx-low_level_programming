@@ -1,4 +1,6 @@
 #include "main.h"
+#include <stdlib.h>
+#include <stddef.h>
 
 /**
  * create_array - a function that creates an array of chars, and initializes it with a specific char
@@ -20,7 +22,8 @@ char *create_array(unsigned int size, char c)
 	if (size == 0 || ar == NULL)
 		return (NULL);
 
-	for (a = 0, a < size, a++)
+	for (a = 0; a < size; a++)
 		ar[a] = c;
+
 	return (ar);
 }
