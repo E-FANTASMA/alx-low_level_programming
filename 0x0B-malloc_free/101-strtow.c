@@ -64,7 +64,7 @@ int wrd_cnt(char *s)
 char **strtow(char *str)
 {
 	char **st;
-	int i = 0, wrd, w, letters, l;
+	int i = 0, wrd, w, lt, l;
 
 	if (str == NULL || str[0] == '\0')
 		return (NULL);
@@ -82,9 +82,9 @@ char **strtow(char *str)
 		while (str[i] == ' ')
 			i++;
 
-		letters = wrd_len(str + i);
+		lt = wrd_len(str + i);
 
-		st[w] = malloc(sizeof(char) * (letters + 1));
+		st[w] = malloc(sizeof(char) * (lt + 1));
 
 		if (st[w] == NULL)
 		{
@@ -95,7 +95,7 @@ char **strtow(char *str)
 			return (NULL);
 		}
 
-		for (l = 0; l < letters; l++)
+		for (l = 0; l < lt; l++)
 			st[w][l] = str[i++];
 
 		st[w][l] = '\0';
