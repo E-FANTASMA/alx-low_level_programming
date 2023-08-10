@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 	if (num1 < 0)
 	{
 		printf("Error\n");
-                exit(98);
+		exit(98);
 	}
 
 	num2 = atoi(argv[2]);/* should be positive */
@@ -36,11 +36,11 @@ int main(int argc, char **argv)
 	if (num2 < 0)
 	{
 		printf("Error\n");
-                exit(98);
+		exit(98);
 	}
 
 	result = num1 * num2;
-	printf("%d\n",result);
+	printf("%d\n", result);
 
 	return (0);
 }
