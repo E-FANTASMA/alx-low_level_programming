@@ -2,30 +2,33 @@
 #define DOG_H
 
 /**
- * struct dog - Dog
+ * struct dog - dog info
  *
- * @name: the dog's name
+ * @name: name of dog
  *
- * @age: the dog's age
+ * @age: age of dog
  *
- * @owner: the dog's owner
+ * @owner: owner of dog
  *
- * Desc: Description
+ * Description: Longer description
  */
-
-typedef struct dog
+struct dog
 {
 	char *name;
 	float age;
 	char *owner;
-}
-dog_t;
+};
 
-void init_dog(struct dog *d, char *name, float age, char *owner);/*no arg*/
-void print_dog(struct dog *d);/*void takes no arg*/
+/**
+ * dog_t - typedef for struct dog
+ */
+typedef struct dog dog_t;
+
+void init_dog(struct dog *d, char *name, float age, char *owner);
+void print_dog(struct dog *d);
 dog_t *new_dog(char *name, float age, char *owner);
-void free_dog(dog_t *d);/*void takes no arg*/
-char *_strncpy(char *dest, char *src, int n);
+void free_dog(dog_t *d);
+char *_strcpy(char *dest, char *src);
 int _strlen(char *s);
 
 #endif
