@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 	int x;
 	int y;
 	int z;
-	int (*a)(int, int);
+	int (*f)(int, int);
 
 	if (argc != 4)
 	{
@@ -26,13 +26,13 @@ int main(int argc, char *argv[])
 	}
 	x = atoi(argv[1]);
 	y = atoi(argv[3]);
-	a = get_op_func(argv[2]);
-	if (a == NULL)
+	f = get_op_func(argv[2]);
+	if (f == NULL)
 	{
 		printf("Error\n");
 		exit(99);
 	}
-	z = a(x, y);
+	z = f(x, y);
 	/*%d an integer argument in a formatted input and output statement*/
 	printf("%d\n", z);
 	return (0);
