@@ -40,14 +40,12 @@ void print_all(const char * const format, ...)
 			break;
 		case 'f':/* f represents a float*/
 			printf("%f%s", va_arg(valist, double), sep);
-			/*%f is for float and %s is for string*/
 			break;
 		case 's':/* s represents a sting*/
 			s = va_arg(valist, char *);
 			if (s == NULL)
 				s = "(nil)";
 			printf("%s%s", s, sep);
-			/*both "%s%s" represent two strings*/
 			break;
 		}
 		a++;
