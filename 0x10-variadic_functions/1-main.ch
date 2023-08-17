@@ -3,5 +3,6 @@
 
 void print_numbers();
 void print_strings();
+void print_all()
 
 #endif
