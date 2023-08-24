@@ -7,7 +7,7 @@
  *
  * @h: pointer
  *
- * return: success
+ * Return: success
  */
 
 size_t list_len(const list_t *h)
