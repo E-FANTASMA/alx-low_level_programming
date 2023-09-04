@@ -14,7 +14,7 @@
 
 int main(int gc, char *gv[])
 {
-	int origin;
+	int origin = -1;
 	int dest;
 	int num_1;
 	int num_2;
@@ -28,8 +28,6 @@ int main(int gc, char *gv[])
 		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n"), exit(97);
 		origin = open(gv[1], O_RDONLY);
 	}
-
-	origin = -1;
 
 	if (origin == -1)
 	{
