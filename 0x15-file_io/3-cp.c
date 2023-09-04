@@ -1,64 +1,62 @@
+#define _POSIX_C_SOURCE 200809L
+#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include "main.h"
+#define READ_NBYTES 1204
 
 /**
-* main - copies the content of a file
-*
-* @gc: num argument
-*
-* @gv: str argument
-*
-* Return: success
-*/
-
-int main(int gc, char *gv[])
+ * main - copy one file into another
+ *
+ * @argc: count of argument
+ * 
+ * @argv: array of arguments to program
+ *
+ * Return: EXIT_SUCCESS on success, exit with error number, otherwise.
+ */
+int main(int argc, char *argv[])
 {
-	int origin = -1;
-	int dest;
-	int num_1;
-	int num_2;
-	char b[1024];
+	char *file_from, *file_to;
+	char buf[READ_NBYTES];
+	ssize_t r;
+	int dr, dw, c = 0;
 
-	num_1 = 1024;
-	num_2 = 0;
-
-	if (gc != 3)
+	if (argc != 3)
 	{
-		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n"), exit(97);
-		origin = open(gv[1], O_RDONLY);
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
+		exit(97);
 	}
-
-	if (origin == -1)
+	file_from = argv[1];
+	file_to = argv[2];
+	dr = open(file_from, O_RDONLY);
+	if (dr == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", gv[1]);
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n",
+			file_from);
 		exit(98);
 	}
-	dest = open(gv[2], O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR
-			| S_IRGRP | S_IWGRP | S_IROTH);
-	if (dest == -1)
+	dw = open(file_to, O_CREAT | O_TRUNC | O_WRONLY, 00664);
+	if (dw == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", gv[2]);
-		close(origin), exit(99);
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_to);
+		exit(99);
 	}
-	while (num_1 == 1024)
+	while ((r = read(dr, buf, READ_NBYTES)))
+		write(dw, buf, r);
+	if (close(dw))
 	{
-		num_1 = read(origin, b, 1024);
-		if (num_1 == -1)
-		{
-			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", gv[1]);
-			exit(98);
-		}
-		num_2 = write(dest, b, num_1);
-		if (num_2 < num_1)
-		{
-			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", gv[2]), exit(99);
-		}
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", dw);
+		c = 1;
 	}
-	if (close(origin) == -1)
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", origin), exit(100);
-
-	if (close(dest) == -1)
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", dest), exit(100);
-	return (0);
+	if (close(dr))
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", dr);
+		c = 1;
+	}
+	if (c)
+		exit(100);
+	exit(EXIT_SUCCESS);
 }
